@@ -1,26 +1,38 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <mainSection/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import mainSection from './components/main.vue';
+  import { onMounted } from 'vue'
+  import  supabase  from './lib/supabaseClient'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  export default {
+    name: 'App',
+    components: {
+      mainSection
+    },
+    setup() {
+      
+      let profiles = [];
+
+      async function getProfiles() {
+        const  data  = await supabase.from('githubProfiles').select('*');
+        profiles = data;
+      }
+
+      onMounted(() => {
+        getProfiles();
+      });
+
+      return {
+        profiles,
+      };
+    }
   }
-}
+
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import url('./css/style.css');
 </style>
