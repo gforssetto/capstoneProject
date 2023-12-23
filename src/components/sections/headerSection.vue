@@ -17,18 +17,25 @@
 <script>
 
 import $ from 'jquery';
+import  supabase  from '/src/lib/supabaseClient.js'
 
 export default {
     name:'headerSection',
     methods:{
-        addCard(e){
-            e.preventDefault();
-            let name =  $('.formInput').eq(0)
-            let email =  $('.formInput').eq(1)
-            let gitHub =  $('.formInput').eq(2)
+        addCard(){
+            let name =  $('.formInput').eq(0).val()
+            let email =  $('.formInput').eq(1).val()
+            let gitHub =  $('.formInput').eq(2).val()
+            this.card.name = name;
+            this.card.email = email;
+            this.card.github = gitHub;
             console.log(
-               name, email, gitHub
+               this.card
             )
+            this.insertNew(this.card)
+        },
+        async insertNew(newCard){
+            await supabase.from('githubProfiles').insert(newCard)
         }
     },
     data(){

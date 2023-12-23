@@ -1,35 +1,17 @@
 <template>
     <main>
-        <card-section v-for="card in cardList" :key="card.email" :info="card"/>
+        <card-section v-for="profile in profileList" :key="profile.id" :info="profile"/>
     </main>
 </template>
 
 <script>
 import cardSection from './cardSection.vue'
+
 export default {
   components: { cardSection },
     name:'listSection',
-    data(){
-        return{
-            cardList:[
-                {
-                    name:'Guilherme',
-                    email:'email@mail.com',
-                    github:'GitGui'
-                },
-                {
-                    name:'Nathan',
-                    email:'email@mail.com',
-                    github:'NathHub'
-                },
-                {
-                    name:'Rafael',
-                    email:'email@mail.com',
-                    github:'Raff_12'
-                },
-
-            ]
-        }
+    props:{
+        profileList:[]
     }
 }
 </script>
