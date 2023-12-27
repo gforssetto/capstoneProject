@@ -13,10 +13,7 @@
         </aside>
         <article class="none confirm">
             <aside>
-                <button v-on:click="deleteCard">Delete</button>
-                <div class="none">
-                    {{ info.id }}
-                </div>
+                <button v-on:click="deleteCard" :id="itemID">Delete</button>
                 <button v-on:click="cancel">Cancel</button>
             </aside>
         </article>
@@ -32,9 +29,14 @@ export default {
     props:{
         info:{}
     },
+    computed:{
+        itemID(){
+            return this.info.id 
+        }
+    },
     methods:{
         async deleteCard(e){
-            let cardId = $(e.target).next().html()
+            let cardId = $(e.target).attr('id')
             await supabase.from('githubProfiles').delete().match({id:cardId})
             location.reload(true)
         },
