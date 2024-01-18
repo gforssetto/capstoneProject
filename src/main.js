@@ -13,3 +13,12 @@ createApp(App).mount('#app')
 
 
 // $(".formInput")
+
+// CALL DO LUI SERA QUE PRESTA ????????????? 
+
+// let diserved = styled.aside` 
+//     h1{
+//         fontsize:
+//     }
+// `;
+// export default diserved
